@@ -1,9 +1,11 @@
 package dev.emad.di
 
+import dev.emad.business.service.SearchService
 import dev.emad.business.service.SeederService
 import dev.emad.business.service.UserService
 import dev.emad.framework.data.local.dao.DatabaseFactory
 import dev.emad.framework.data.local.dao.UserDao
+import dev.emad.framework.data.remote.service.SearchServiceImpl
 import dev.emad.framework.data.remote.service.SeederServiceImpl
 import dev.emad.framework.data.remote.service.UserServiceImpl
 import dev.emad.framework.data.repository.UserRepository
@@ -25,5 +27,8 @@ val ProjectModule = module {
     }
     single<SeederService> {
         SeederServiceImpl(get())
+    }
+    single<SearchService> {
+        SearchServiceImpl()
     }
 }

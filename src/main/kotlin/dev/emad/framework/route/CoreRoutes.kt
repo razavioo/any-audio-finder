@@ -1,5 +1,6 @@
 package dev.emad.framework.route
 
+import dev.emad.business.service.SearchService
 import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.auth.*
@@ -7,10 +8,12 @@ import io.ktor.server.auth.jwt.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import org.json.simple.JSONObject
+import org.koin.ktor.ext.inject
 
 fun Routing.coreRoutes() {
     rootRoute()
     adminRoute()
+    searchRoute()
 }
 
 fun Routing.rootRoute() {
@@ -38,5 +41,18 @@ fun Routing.adminRoute() {
                 JSONObject(mapOf("message" to "Hello admin!"))
             )
         }
+    }
+}
+
+fun Routing.searchRoute() {
+    val searchService: SearchService by inject()
+
+    get("/search") {
+        val query = call.request.queryParameters["query"]
+        val response = searchService.search(query)
+        call.respond(
+            response.status,
+            response.data
+        )
     }
 }
