@@ -22,6 +22,13 @@ class GeneralMusicGrabber : MusicGrabber() {
                 }
             }
 
+            MusicSource.AVAZINO -> {
+                AvazinoMusicGrabber().grab(url).collectLatest {
+                    trySend(it)
+                    close()
+                }
+            }
+
             else -> {
                 close()
             }
@@ -38,6 +45,10 @@ class GeneralMusicGrabber : MusicGrabber() {
 
             url.startsWith(MusicSource.MUZIC_IR.website) -> {
                 MusicSource.MUZIC_IR
+            }
+
+            url.startsWith(MusicSource.AVAZINO.website) -> {
+                MusicSource.AVAZINO
             }
 
             else -> null
