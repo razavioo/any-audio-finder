@@ -4,5 +4,6 @@ enum class MusicSource(val website: String) {
     TARAFDARI("https://www.tarafdari.com"),
     MUZICIR("https://muzicir.com"),
     AVAZINO("https://avazino.net"),
-    MUSICFA("https://music-fa.com")
+    MUSICFA("https://music-fa.com"),
+    MUSIC_FEED("https://musicfeed.ir")
 }
