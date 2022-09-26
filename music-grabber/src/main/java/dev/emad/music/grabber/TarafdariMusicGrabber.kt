@@ -6,8 +6,8 @@ import kotlinx.coroutines.flow.callbackFlow
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
 
-class TarafdariMusicGrabber : MusicGrabber<MusicSource.TARAFDARI>() {
-    override fun grab(url: String): Flow<MusicInformation<MusicSource.TARAFDARI>> = callbackFlow {
+class TarafdariMusicGrabber : MusicGrabber() {
+    override fun grab(url: String): Flow<MusicInformation> = callbackFlow {
         val document: Document = Jsoup.connect(url).get()
         val links = document.select("a")
         for (element in links) {

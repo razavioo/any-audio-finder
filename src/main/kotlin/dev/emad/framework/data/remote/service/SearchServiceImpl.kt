@@ -4,9 +4,8 @@ import dev.emad.business.service.SearchService
 import dev.emad.framework.data.remote.response.model.Response
 import dev.emad.google.search.SearchResult
 import dev.emad.google.search.Searcher
+import dev.emad.music.grabber.GeneralMusicGrabber
 import dev.emad.music.grabber.MusicGrabber
-import dev.emad.music.grabber.MusicSource
-import dev.emad.music.grabber.TarafdariMusicGrabber
 import io.ktor.http.*
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.firstOrNull
@@ -31,13 +30,10 @@ class SearchServiceImpl : SearchService {
             }
 
             searchResults?.let {
-                val tarafdariMusicGrabber: MusicGrabber<MusicSource.TARAFDARI> = TarafdariMusicGrabber()
-                val downloadUrl = it.first { searchResult ->
-                    searchResult.url.startsWith(MusicSource.TARAFDARI.website)
-                }
-
+                val musicGrabber: MusicGrabber = GeneralMusicGrabber()
+                val downloadUrl = it.first()
                 val musicInformation = withTimeoutOrNull(MAX_MUSIC_GRABBER_DELAY) {
-                    tarafdariMusicGrabber.grab(downloadUrl.url).first()
+                    musicGrabber.grab(downloadUrl.url).first()
                 }
 
                 musicInformation?.let {
