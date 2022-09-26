@@ -1,26 +1,33 @@
 package dev.emad.music.grabber
 
+import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.callbackFlow
+import kotlinx.coroutines.flow.channelFlow
 import kotlinx.coroutines.flow.collectLatest
 
 class GeneralMusicGrabber : MusicGrabber() {
-    override fun grab(url: String): Flow<MusicInformation> = callbackFlow {
-        getMusicSource(url)?.let { musicSource ->
-            when (musicSource) {
-                MusicSource.MUZICIR -> {
-                    MuzicIrMusicGrabber().grab(url).collectLatest {
-                        trySend(it)
-                    }
-                }
-
-                MusicSource.TARAFDARI -> {
-                    TarafdariMusicGrabber().grab(url).collectLatest {
-                        trySend(it)
-                    }
+    override fun grab(url: String): Flow<MusicInformation> = channelFlow {
+        when (getMusicSource(url)) {
+            MusicSource.MUZIC_IR -> {
+                MuzicIrMusicGrabber().grab(url).collectLatest {
+                    trySend(it)
+                    close()
                 }
             }
+
+            MusicSource.TARAFDARI -> {
+                TarafdariMusicGrabber().grab(url).collectLatest {
+                    trySend(it)
+                    close()
+                }
+            }
+
+            else -> {
+                close()
+            }
         }
+
+        awaitClose()
     }
 
     private fun getMusicSource(url: String): MusicSource? {
@@ -29,8 +36,8 @@ class GeneralMusicGrabber : MusicGrabber() {
                 MusicSource.TARAFDARI
             }
 
-            url.startsWith(MusicSource.MUZICIR.website) -> {
-                MusicSource.MUZICIR
+            url.startsWith(MusicSource.MUZIC_IR.website) -> {
+                MusicSource.MUZIC_IR
             }
 
             else -> null

@@ -7,7 +7,6 @@ import dev.emad.google.search.Searcher
 import dev.emad.music.grabber.GeneralMusicGrabber
 import dev.emad.music.grabber.MusicGrabber
 import io.ktor.http.*
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.withTimeoutOrNull
 import org.json.simple.JSONObject
@@ -29,28 +28,29 @@ class SearchServiceImpl : SearchService {
                 }
             }
 
-            searchResults?.let {
-                val musicGrabber: MusicGrabber = GeneralMusicGrabber()
-                val downloadUrl = it.first()
-                val musicInformation = withTimeoutOrNull(MAX_MUSIC_GRABBER_DELAY) {
-                    musicGrabber.grab(downloadUrl.url).first()
-                }
-
-                musicInformation?.let {
-                    Response(
-                        JSONObject(mapOf("message" to musicInformation)),
-                        HttpStatusCode.OK
-                    )
-                } ?: run {
-                    Response(
-                        JSONObject(mapOf("message" to "No search result found")),
-                        HttpStatusCode.NotFound
-                    )
-                }
-            } ?: run {
+            return if (searchResults == null) {
                 Response(
                     JSONObject(mapOf("message" to "Search results not received")),
                     HttpStatusCode.Forbidden
+                )
+            } else {
+                val musicGrabber: MusicGrabber = GeneralMusicGrabber()
+                searchResults.forEach { searchResult ->
+                    val musicInformation = withTimeoutOrNull(MAX_MUSIC_GRABBER_DELAY) {
+                        musicGrabber.grab(searchResult.url).firstOrNull()
+                    }
+
+                    musicInformation?.let {
+                        return Response(
+                            JSONObject(mapOf("message" to musicInformation)),
+                            HttpStatusCode.OK
+                        )
+                    }
+                }
+
+                return Response(
+                    JSONObject(mapOf("message" to "No search result found")),
+                    HttpStatusCode.NotFound
                 )
             }
         }
@@ -58,6 +58,6 @@ class SearchServiceImpl : SearchService {
 
     companion object {
         const val MAX_SEARCH_RESULT_DELAY = 20_000L
-        const val MAX_MUSIC_GRABBER_DELAY = 20_000L
+        const val MAX_MUSIC_GRABBER_DELAY = 10_000L
     }
 }
