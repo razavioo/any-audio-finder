@@ -9,7 +9,7 @@ class GeneralMusicGrabber : MusicGrabber() {
     override fun grab(url: String): Flow<MusicInformation> = channelFlow {
         getMusicSource(url)?.let { musicSource ->
             when (musicSource) {
-                MusicSource.MUZIC_IR -> {
+                MusicSource.MUZICIR -> {
                     MuzicIrMusicGrabber().grab(url).collectLatest {
                         trySend(it)
                         close()
@@ -29,6 +29,13 @@ class GeneralMusicGrabber : MusicGrabber() {
                         close()
                     }
                 }
+
+                MusicSource.MUSICFA -> {
+                    MusicfaMusicGrabber().grab(url).collectLatest {
+                        trySend(it)
+                        close()
+                    }
+                }
             }
         } ?: run {
             close()
@@ -39,8 +46,9 @@ class GeneralMusicGrabber : MusicGrabber() {
 
     private fun getMusicSource(url: String): MusicSource? = when {
         url.startsWith(MusicSource.TARAFDARI.website) -> MusicSource.TARAFDARI
-        url.startsWith(MusicSource.MUZIC_IR.website) -> MusicSource.MUZIC_IR
+        url.startsWith(MusicSource.MUZICIR.website) -> MusicSource.MUZICIR
         url.startsWith(MusicSource.AVAZINO.website) -> MusicSource.AVAZINO
+        url.startsWith(MusicSource.MUSICFA.website) -> MusicSource.MUSICFA
         else -> null
     }
 }

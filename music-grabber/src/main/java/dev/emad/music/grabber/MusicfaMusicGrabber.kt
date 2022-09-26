@@ -7,14 +7,14 @@ import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
 import org.jsoup.nodes.Element
 
-class MuzicIrMusicGrabber : MusicGrabber() {
+class MusicfaMusicGrabber : MusicGrabber() {
     override fun grab(url: String): Flow<MusicInformation> = channelFlow {
         val document: Document = Jsoup.connect(url).get()
-        val element: Element? = document.select("div").firstOrNull { element -> element.hasClass("audio") }
+        val element: Element? = document.select("div").firstOrNull { element -> element.hasClass("bdownloadfa") }
         val audioElement = element?.select("audio")?.firstOrNull()
-        val downloadUrl = audioElement?.select("source")?.firstOrNull()?.attr("src")
+        val downloadUrl = audioElement?.attr("src")
         val musicInformation = MusicInformation(
-            source = MusicSource.MUZICIR,
+            source = MusicSource.MUSICFA,
             pageUrl = url,
             downloadUrl = downloadUrl.toString()
         )
