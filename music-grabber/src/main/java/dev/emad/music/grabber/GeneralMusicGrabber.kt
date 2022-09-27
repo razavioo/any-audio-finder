@@ -31,16 +31,14 @@ class GeneralMusicGrabber : MusicGrabber() {
         else -> null
     }
 
-    private fun getMusicGrabber(musicSource: MusicSource): MusicGrabber {
-        return when (musicSource) {
-            MusicSource.MUZIC_IR -> MuzicIrMusicGrabber()
-            MusicSource.TARAFDARI -> TarafdariMusicGrabber()
-            MusicSource.AVAZINO -> AvazinoMusicGrabber()
-            MusicSource.MUSIC_FA -> MusicFaMusicGrabber()
-            MusicSource.MUSIC_FEED -> MusicFeedMusicGrabber()
-            MusicSource.MAHAN_MUSIC -> MahanMusicMusicGrabber()
-            MusicSource.MUSIC_DAYS -> MusicDaysMusicGrabber()
-            MusicSource.MUSIC_DEL -> MusicDelMusicGrabber()
-        }
+    private fun getMusicGrabber(musicSource: MusicSource): MusicGrabber = when (musicSource) {
+        MusicSource.MUZIC_IR -> MuzicIrMusicGrabber()
+        MusicSource.TARAFDARI -> TarafdariMusicGrabber()
+        MusicSource.AVAZINO -> AvazinoMusicGrabber()
+        MusicSource.MUSIC_FA -> MusicFaMusicGrabber()
+        MusicSource.MUSIC_FEED -> MusicFeedMusicGrabber()
+        MusicSource.MAHAN_MUSIC -> MahanMusicMusicGrabber()
+        MusicSource.MUSIC_DAYS -> MusicDaysMusicGrabber()
+        MusicSource.MUSIC_DEL -> MusicDelMusicGrabber()
     }
 }
