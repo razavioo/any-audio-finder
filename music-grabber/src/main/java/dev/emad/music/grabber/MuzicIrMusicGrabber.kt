@@ -15,7 +15,7 @@ class MuzicIrMusicGrabber : MusicGrabber() {
         val downloadUrl = audioElement?.select("source")?.firstOrNull()?.attr("src")
         if (downloadUrl != null) {
             val musicInformation = MusicInformation(
-                source = MusicSource.MUZICIR,
+                source = MusicSource.MUZIC_IR,
                 pageUrl = url,
                 downloadUrl = downloadUrl
             )

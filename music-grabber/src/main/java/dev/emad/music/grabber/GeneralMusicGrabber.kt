@@ -8,48 +8,9 @@ import kotlinx.coroutines.flow.collectLatest
 class GeneralMusicGrabber : MusicGrabber() {
     override fun grab(url: String): Flow<MusicInformation> = channelFlow {
         getMusicSource(url)?.let { musicSource ->
-            when (musicSource) {
-                MusicSource.MUZICIR -> {
-                    MuzicIrMusicGrabber().grab(url).collectLatest {
-                        trySend(it)
-                        close()
-                    }
-                }
-
-                MusicSource.TARAFDARI -> {
-                    TarafdariMusicGrabber().grab(url).collectLatest {
-                        trySend(it)
-                        close()
-                    }
-                }
-
-                MusicSource.AVAZINO -> {
-                    AvazinoMusicGrabber().grab(url).collectLatest {
-                        trySend(it)
-                        close()
-                    }
-                }
-
-                MusicSource.MUSICFA -> {
-                    MusicfaMusicGrabber().grab(url).collectLatest {
-                        trySend(it)
-                        close()
-                    }
-                }
-
-                MusicSource.MUSIC_FEED -> {
-                    MusicFeedMusicGrabber().grab(url).collectLatest {
-                        trySend(it)
-                        close()
-                    }
-                }
-
-                MusicSource.MAHAN_MUSIC -> {
-                    MahanMusicMusicGrabber().grab(url).collectLatest {
-                        trySend(it)
-                        close()
-                    }
-                }
+            getMusicGrabber(musicSource).grab(url).collectLatest {
+                trySend(it)
+                close()
             }
         } ?: run {
             close()
@@ -60,11 +21,26 @@ class GeneralMusicGrabber : MusicGrabber() {
 
     private fun getMusicSource(url: String): MusicSource? = when {
         url.startsWith(MusicSource.TARAFDARI.website) -> MusicSource.TARAFDARI
-        url.startsWith(MusicSource.MUZICIR.website) -> MusicSource.MUZICIR
+        url.startsWith(MusicSource.MUZIC_IR.website) -> MusicSource.MUZIC_IR
         url.startsWith(MusicSource.AVAZINO.website) -> MusicSource.AVAZINO
-        url.startsWith(MusicSource.MUSICFA.website) -> MusicSource.MUSICFA
+        url.startsWith(MusicSource.MUSIC_FA.website) -> MusicSource.MUSIC_FA
         url.startsWith(MusicSource.MUSIC_FEED.website) -> MusicSource.MUSIC_FEED
         url.startsWith(MusicSource.MAHAN_MUSIC.website) -> MusicSource.MAHAN_MUSIC
+        url.startsWith(MusicSource.MUSIC_DAYS.website) -> MusicSource.MUSIC_DAYS
+        url.startsWith(MusicSource.MUSIC_DEL.website) -> MusicSource.MUSIC_DEL
         else -> null
+    }
+
+    private fun getMusicGrabber(musicSource: MusicSource): MusicGrabber {
+        return when (musicSource) {
+            MusicSource.MUZIC_IR -> MuzicIrMusicGrabber()
+            MusicSource.TARAFDARI -> TarafdariMusicGrabber()
+            MusicSource.AVAZINO -> AvazinoMusicGrabber()
+            MusicSource.MUSIC_FA -> MusicFaMusicGrabber()
+            MusicSource.MUSIC_FEED -> MusicFeedMusicGrabber()
+            MusicSource.MAHAN_MUSIC -> MahanMusicMusicGrabber()
+            MusicSource.MUSIC_DAYS -> MusicDaysMusicGrabber()
+            MusicSource.MUSIC_DEL -> MusicDelMusicGrabber()
+        }
     }
 }
