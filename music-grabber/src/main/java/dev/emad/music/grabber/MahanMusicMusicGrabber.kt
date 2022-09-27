@@ -15,7 +15,7 @@ class MahanMusicMusicGrabber : MusicGrabber() {
         val sourceElement = audioElement?.select("source")
         val downloadUrl = sourceElement?.attr("src")
         val musicInformation = MusicInformation(
-            source = MusicSource.AVAZINO,
+            source = MusicSource.MAHAN_MUSIC,
             pageUrl = url,
             downloadUrl = downloadUrl.toString()
         )
