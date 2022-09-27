@@ -1,13 +1,14 @@
 package dev.emad.music.grabber
 
-enum class MusicSource(val website: String) {
-    TARAFDARI("https://www.tarafdari.com"),
-    MUZIC_IR("https://muzicir.com"),
-    AVAZINO("https://avazino.net"),
-    MUSIC_FA("https://music-fa.com"),
-    MUSIC_FEED("https://musicfeed.ir"),
-    MAHAN_MUSIC("https://mahanmusic.net"),
-    MUSIC_DAYS("https://www.musicdays.ir"),
-    MUSIC_DEL("https://musicdel.ir"),
-    PLAY_MUSIC("https://www.playmusic.ir")
+enum class MusicSource(val website: String, val grabber: MusicGrabber) {
+    TARAFDARI("https://www.tarafdari.com", TarafdariMusicGrabber()),
+    MUZIC_IR("https://muzicir.com", MuzicIrMusicGrabber()),
+    AVAZINO("https://avazino.net", AvazinoMusicGrabber()),
+    MUSIC_FA("https://music-fa.com", MusicFaMusicGrabber()),
+    MUSIC_FEED("https://musicfeed.ir", MusicFeedMusicGrabber()),
+    MAHAN_MUSIC("https://mahanmusic.net", MahanMusicMusicGrabber()),
+    MUSIC_DAYS("https://www.musicdays.ir", MusicDaysMusicGrabber()),
+    MUSIC_DEL("https://musicdel.ir", MusicDelMusicGrabber()),
+    PLAY_MUSIC("https://www.playmusic.ir", PlayMusicMusicGrabber()),
+    MUSIC_WEB("https://musicsweb.ir", MusicWebMusicMusicGrabber())
 }
