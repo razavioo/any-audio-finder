@@ -8,5 +8,6 @@ enum class MusicSource(val website: String) {
     MUSIC_FEED("https://musicfeed.ir"),
     MAHAN_MUSIC("https://mahanmusic.net"),
     MUSIC_DAYS("https://www.musicdays.ir"),
-    MUSIC_DEL("https://musicdel.ir")
+    MUSIC_DEL("https://musicdel.ir"),
+    PLAY_MUSIC("https://www.playmusic.ir")
 }

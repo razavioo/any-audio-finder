@@ -28,6 +28,7 @@ class GeneralMusicGrabber : MusicGrabber() {
         url.startsWith(MusicSource.MAHAN_MUSIC.website) -> MusicSource.MAHAN_MUSIC
         url.startsWith(MusicSource.MUSIC_DAYS.website) -> MusicSource.MUSIC_DAYS
         url.startsWith(MusicSource.MUSIC_DEL.website) -> MusicSource.MUSIC_DEL
+        url.startsWith(MusicSource.PLAY_MUSIC.website) -> MusicSource.PLAY_MUSIC
         else -> null
     }
 
@@ -40,5 +41,6 @@ class GeneralMusicGrabber : MusicGrabber() {
         MusicSource.MAHAN_MUSIC -> MahanMusicMusicGrabber()
         MusicSource.MUSIC_DAYS -> MusicDaysMusicGrabber()
         MusicSource.MUSIC_DEL -> MusicDelMusicGrabber()
+        MusicSource.PLAY_MUSIC -> PlayMusicMusicGrabber()
     }
 }
