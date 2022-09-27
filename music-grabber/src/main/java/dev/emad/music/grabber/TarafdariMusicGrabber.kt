@@ -24,8 +24,8 @@ class TarafdariMusicGrabber : MusicGrabber() {
                 }
             }
         }
-        close()
 
+        close()
         awaitClose()
     }
 }

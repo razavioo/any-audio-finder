@@ -14,14 +14,16 @@ class MahanMusicMusicGrabber : MusicGrabber() {
         val audioElement = element?.select("audio")?.firstOrNull()
         val sourceElement = audioElement?.select("source")
         val downloadUrl = sourceElement?.attr("src")
-        val musicInformation = MusicInformation(
-            source = MusicSource.MAHAN_MUSIC,
-            pageUrl = url,
-            downloadUrl = downloadUrl.toString()
-        )
-        trySend(musicInformation)
-        close()
+        if (downloadUrl != null) {
+            val musicInformation = MusicInformation(
+                source = MusicSource.MAHAN_MUSIC,
+                pageUrl = url,
+                downloadUrl = downloadUrl
+            )
+            trySend(musicInformation)
+        }
 
+        close()
         awaitClose()
     }
 }

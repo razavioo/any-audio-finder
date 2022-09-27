@@ -13,14 +13,16 @@ class MusicFeedMusicGrabber : MusicGrabber() {
         val element: Element? = document.select("div").firstOrNull { element -> element.hasClass("fa_dlbox") }
         val audioElement = element?.select("audio")?.firstOrNull()
         val downloadUrl = audioElement?.attr("src")
-        val musicInformation = MusicInformation(
-            source = MusicSource.MUSIC_FEED,
-            pageUrl = url,
-            downloadUrl = downloadUrl.toString()
-        )
-        trySend(musicInformation)
-        close()
+        if (downloadUrl != null) {
+            val musicInformation = MusicInformation(
+                source = MusicSource.MUSIC_FEED,
+                pageUrl = url,
+                downloadUrl = downloadUrl
+            )
+            trySend(musicInformation)
+        }
 
+        close()
         awaitClose()
     }
 }

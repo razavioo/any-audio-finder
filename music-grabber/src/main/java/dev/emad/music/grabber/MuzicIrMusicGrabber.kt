@@ -13,14 +13,16 @@ class MuzicIrMusicGrabber : MusicGrabber() {
         val element: Element? = document.select("div").firstOrNull { element -> element.hasClass("audio") }
         val audioElement = element?.select("audio")?.firstOrNull()
         val downloadUrl = audioElement?.select("source")?.firstOrNull()?.attr("src")
-        val musicInformation = MusicInformation(
-            source = MusicSource.MUZICIR,
-            pageUrl = url,
-            downloadUrl = downloadUrl.toString()
-        )
-        trySend(musicInformation)
-        close()
+        if (downloadUrl != null) {
+            val musicInformation = MusicInformation(
+                source = MusicSource.MUZICIR,
+                pageUrl = url,
+                downloadUrl = downloadUrl
+            )
+            trySend(musicInformation)
+        }
 
+        close()
         awaitClose()
     }
 }
