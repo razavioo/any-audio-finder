@@ -43,6 +43,13 @@ class GeneralMusicGrabber : MusicGrabber() {
                         close()
                     }
                 }
+
+                MusicSource.MAHAN_MUSIC -> {
+                    MahanMusicMusicGrabber().grab(url).collectLatest {
+                        trySend(it)
+                        close()
+                    }
+                }
             }
         } ?: run {
             close()
@@ -57,6 +64,7 @@ class GeneralMusicGrabber : MusicGrabber() {
         url.startsWith(MusicSource.AVAZINO.website) -> MusicSource.AVAZINO
         url.startsWith(MusicSource.MUSICFA.website) -> MusicSource.MUSICFA
         url.startsWith(MusicSource.MUSIC_FEED.website) -> MusicSource.MUSIC_FEED
+        url.startsWith(MusicSource.MAHAN_MUSIC.website) -> MusicSource.MAHAN_MUSIC
         else -> null
     }
 }
