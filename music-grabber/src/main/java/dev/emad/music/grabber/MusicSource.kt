@@ -12,5 +12,6 @@ enum class MusicSource(val website: String, val grabber: MusicGrabber) {
     PLAY_MUSIC("https://www.playmusic.ir", PlayMusicMusicGrabber()),
     MUSIC_WEB("https://musicsweb.ir", MusicWebMusicMusicGrabber()),
     BEAUTY_MUSIC("http://www.beautymusic.ir", BeautyMusicMusicMusicGrabber()),
-    MY_EASY_MUSIC("https://www.myeasymusic.ir", MyEasyMusicMusicGrabber())
+    MY_EASY_MUSIC("https://www.myeasymusic.ir", MyEasyMusicMusicGrabber()),
+    MUSIC_AVA("https://music-ava.ir", MusicAvaMusicMusicGrabber())
 }

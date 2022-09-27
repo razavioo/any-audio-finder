@@ -18,7 +18,6 @@ class MusicDelMusicGrabber : MusicGrabber() {
                 downloadUrl = downloadUrl
             )
             trySend(musicInformation)
-
         }
 
         close()
