@@ -1,5 +1,6 @@
 package dev.emad.framework.data.local.dao
 
+import dev.emad.framework.data.local.model.LocalAudios
 import dev.emad.framework.data.local.model.LocalUsers
 import org.jetbrains.exposed.sql.Database
 import org.jetbrains.exposed.sql.SchemaUtils
@@ -24,6 +25,7 @@ object DatabaseFactory {
         }
         transaction(database) {
             SchemaUtils.create(LocalUsers)
+            SchemaUtils.create(LocalAudios)
         }
         return database
     }
