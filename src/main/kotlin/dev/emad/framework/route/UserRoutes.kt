@@ -1,6 +1,5 @@
 package dev.emad.framework.route
 
-import dev.emad.business.service.UserService
 import dev.emad.framework.data.remote.request.model.LoginRequest
 import dev.emad.framework.data.remote.request.model.UserRequest
 import io.ktor.server.application.*
