@@ -1,1 +1,1 @@
-web: ./build/install/pollux/bin/pollux
+web: ./build/install/any-music-finder/bin/any-music-finder
