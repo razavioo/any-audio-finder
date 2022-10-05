@@ -1,1 +1,1 @@
-web: ./build/install/any-music-finder/bin/any-music-finder
+web: ./build/install/dev.emad.music/bin/dev.emad.music
