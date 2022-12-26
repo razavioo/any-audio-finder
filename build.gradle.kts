@@ -6,8 +6,6 @@ val exposed_version: String by project
 val postgresql_version: String by project
 val h2_version: String by project
 val horizon_common_version: String by project
-val horizon_automation_version: String by project
-val horizon_selenium_version: String by project
 
 plugins {
     application
@@ -78,8 +76,6 @@ dependencies {
     implementation("com.h2database:h2:$h2_version")
     implementation("org.postgresql:postgresql:$postgresql_version")
     implementation("com.horizon:common:$horizon_common_version")
-    implementation("com.horizon:automation:$horizon_automation_version")
-    implementation("com.horizon:selenium:$horizon_selenium_version")
     testImplementation("io.ktor:ktor-server-tests-jvm:$ktor_version")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version")
     testImplementation("io.insert-koin:koin-test:$koin_version")
