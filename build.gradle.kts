@@ -25,28 +25,6 @@ application {
 
 repositories {
     mavenCentral()
-    maven {
-        url = uri("https://gitlab.adiyanat.com/api/v4/projects/52/packages/maven")
-        credentials {
-            name = "capella-deploy-token"
-            username = "gitlab+deploy-token-3"
-            password = "qSSFzsNjfn49xvvKyuWK"
-        }
-        authentication {
-            create<BasicAuthentication>("basic")
-        }
-    }
-    maven {
-        url = uri("https://gitlab.adiyanat.com/api/v4/projects/71/packages/maven")
-        credentials {
-            name = "android-network-tools-deploy-token"
-            username = "gitlab+deploy-token-6"
-            password = "xKeRTwPqRCcc39KQwFir"
-        }
-        authentication {
-            create<BasicAuthentication>("basic")
-        }
-    }
 }
 
 tasks.create("stage") {
@@ -75,7 +53,6 @@ dependencies {
     implementation("org.jetbrains.exposed:exposed-java-time:$exposed_version")
     implementation("com.h2database:h2:$h2_version")
     implementation("org.postgresql:postgresql:$postgresql_version")
-    implementation("com.horizon:common:$horizon_common_version")
     testImplementation("io.ktor:ktor-server-tests-jvm:$ktor_version")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version")
     testImplementation("io.insert-koin:koin-test:$koin_version")

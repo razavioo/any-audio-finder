@@ -1,6 +1,6 @@
 package dev.emad.framework.data.remote.response.mapper
 
-import com.horizon.common.Mapper
+import dev.emad.framework.data.local.mapper.Mapper
 import dev.emad.framework.data.remote.response.model.UserResponse
 import dev.emad.business.model.User
 
