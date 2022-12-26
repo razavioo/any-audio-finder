@@ -5,7 +5,6 @@ val koin_version: String by project
 val exposed_version: String by project
 val postgresql_version: String by project
 val h2_version: String by project
-val horizon_common_version: String by project
 
 plugins {
     application
