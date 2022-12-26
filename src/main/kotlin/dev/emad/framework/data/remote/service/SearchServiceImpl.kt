@@ -3,6 +3,7 @@ package dev.emad.framework.data.remote.service
 import dev.emad.business.model.Audio
 import dev.emad.business.service.SearchService
 import dev.emad.framework.data.remote.response.mapper.AudioResponseMapper
+import dev.emad.framework.data.remote.response.model.AudioResponse
 import dev.emad.framework.data.remote.response.model.Response
 import dev.emad.framework.data.repository.AudioRepository
 import dev.emad.google.search.SearchResult
@@ -43,14 +44,13 @@ class SearchServiceImpl(
                 )
             } else {
                 val musicGrabber: MusicGrabber = GeneralMusicGrabber()
+                val responses = mutableListOf<AudioResponse>()
+
                 searchResults.forEach { searchResult ->
                     val insertedAudio = audioRepository.getFirstFromPageUrl(searchResult.url)
                     if (insertedAudio != null) {
                         val audioResponse = audioResponseMapper.from(insertedAudio)
-                        return Response(
-                            JSONObject(mapOf("message" to audioResponse)),
-                            HttpStatusCode.OK
-                        )
+                        responses.add(audioResponse)
                     } else {
                         val musicInformation = withTimeoutOrNull(MAX_MUSIC_GRABBER_DELAY) {
                             musicGrabber.grab(searchResult.url).firstOrNull()
@@ -68,18 +68,22 @@ class SearchServiceImpl(
                             audio.id = insertId
 
                             val audioResponse = audioResponseMapper.from(audio)
-                            return Response(
-                                JSONObject(mapOf("message" to audioResponse)),
-                                HttpStatusCode.OK
-                            )
+                            responses.add(audioResponse)
                         }
                     }
                 }
 
-                return Response(
-                    JSONObject(mapOf("message" to "No search result found")),
-                    HttpStatusCode.NotFound
-                )
+                return if (responses.isEmpty()) {
+                    Response(
+                        JSONObject(mapOf("message" to "No search result found")),
+                        HttpStatusCode.NotFound
+                    )
+                } else {
+                    Response(
+                        JSONObject(mapOf("message" to responses)),
+                        HttpStatusCode.OK
+                    )
+                }
             }
         }
     }
