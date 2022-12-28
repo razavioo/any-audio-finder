@@ -1,10 +1,8 @@
-# Any Audio Finder
+# Introduction
 
-This project is a server-side application for finding music using APIs.
-It is built using the Ktor framework and utilizes the Exposed library for database handling,
-Kotlin Coroutines for asynchronous programming,
-Jsoup for parsing and manipulating HTML and XML documents,
-and Koin for dependency injection.
+Any Audio Finder is a web app that allows users to search for and download audio files from the internet.
+It uses a combination of web scraping and search engine APIs to locate audio files online, and stores them
+in a database for easy access from any device.
 
 ## Technology
 
