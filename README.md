@@ -1,8 +1,8 @@
 ## Introduction
 
-Any Audio Finder is a web app that allows users to search for and download audio files from the internet.
+Any Audio Finder is a web server that allows users to search for and download audio files from the internet.
 It uses a combination of web scraping and search engine APIs to locate audio files online, and stores them
-in a database for easy access from any device.
+in a database for easy access from any client.
 
 ## Technology
 
