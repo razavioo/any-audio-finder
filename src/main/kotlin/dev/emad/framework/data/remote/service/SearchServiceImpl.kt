@@ -89,7 +89,7 @@ class SearchServiceImpl(
     }
 
     companion object {
-        const val MAX_SEARCH_RESULT_DELAY = 20_000L
+        const val MAX_SEARCH_RESULT_DELAY = 10_000L
         const val MAX_MUSIC_GRABBER_DELAY = 10_000L
     }
 }
