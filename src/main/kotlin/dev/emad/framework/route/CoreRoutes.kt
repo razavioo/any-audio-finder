@@ -47,12 +47,14 @@ fun Routing.adminRoute() {
 fun Routing.searchRoute() {
     val searchService: SearchService by inject()
 
-    get("/search") {
-        val query = call.request.queryParameters["query"]
-        val response = searchService.search(query)
-        call.respond(
-            response.status,
-            response.data
-        )
+    authenticate("auth-customer") {
+        get("/search") {
+            val query = call.request.queryParameters["query"]
+            val response = searchService.search(query)
+            call.respond(
+                response.status,
+                response.data
+            )
+        }
     }
 }
