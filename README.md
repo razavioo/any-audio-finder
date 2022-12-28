@@ -55,11 +55,11 @@ Searches for audio files with the given query.
 
 #### Parameters
 
-- query (required): The search query.
+- `query` (required): The search query.
 
 #### Headers
 
-- Authorization (required): A JSON Web Token (JWT) for authentication.
+- `Authorization` (required): A JSON Web Token (JWT) for authentication.
 
 #### Response
 
