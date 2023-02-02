@@ -1,5 +1,6 @@
 package dev.emad.framework.route
 
+import dev.emad.business.service.UserService
 import dev.emad.framework.data.remote.request.model.LoginRequest
 import dev.emad.framework.data.remote.request.model.UserRequest
 import io.ktor.server.application.*
@@ -16,7 +17,7 @@ fun Routing.userRoutes() {
 }
 
 fun Routing.loginRoute() {
-    val userService: dev.emad.business.service.UserService by inject()
+    val userService: UserService by inject()
 
     post("/login") {
         val request = call.receive<LoginRequest>()
@@ -26,7 +27,7 @@ fun Routing.loginRoute() {
 }
 
 fun Routing.getAllUsersRoute() {
-    val userService: dev.emad.business.service.UserService by inject()
+    val userService: UserService by inject()
 
     authenticate("auth-admin") {
         get("/user") {
@@ -37,7 +38,7 @@ fun Routing.getAllUsersRoute() {
 }
 
 fun Routing.createUser() {
-    val userService: dev.emad.business.service.UserService by inject()
+    val userService: UserService by inject()
 
     authenticate("auth-admin") {
         post("/user/create") {
