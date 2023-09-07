@@ -56,6 +56,5 @@ dependencies {
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version")
     testImplementation("io.insert-koin:koin-test:$koin_version")
 
-    implementation(project(mapOf("path" to ":google-search")))
     implementation(project(mapOf("path" to ":music-grabber")))
 }

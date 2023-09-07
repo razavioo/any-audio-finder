@@ -1,4 +1,4 @@
-package dev.emad.google.search
+package dev.emad.music.grabber
 
 data class SearchResult(
     val title: String,

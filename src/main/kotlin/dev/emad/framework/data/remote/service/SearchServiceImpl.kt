@@ -6,10 +6,10 @@ import dev.emad.framework.data.remote.response.mapper.AudioResponseMapper
 import dev.emad.framework.data.remote.response.model.AudioResponse
 import dev.emad.framework.data.remote.response.model.Response
 import dev.emad.framework.data.repository.AudioRepository
-import dev.emad.google.search.SearchResult
-import dev.emad.google.search.Searcher
 import dev.emad.music.grabber.GeneralMusicGrabber
 import dev.emad.music.grabber.MusicGrabber
+import dev.emad.music.grabber.SearchResult
+import dev.emad.music.grabber.Searcher
 import dev.emad.utils.EncryptionUtils
 import io.ktor.http.*
 import kotlinx.coroutines.flow.firstOrNull
