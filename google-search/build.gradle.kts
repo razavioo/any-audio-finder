@@ -19,6 +19,7 @@ dependencies {
     implementation("io.ktor:ktor-client-content-negotiation:2.1.1")
     implementation("io.ktor:ktor-serialization-gson:2.1.1")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
+    implementation("org.jsoup:jsoup:1.15.3")
 }
 
 tasks.getByName<Test>("test") {

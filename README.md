@@ -104,8 +104,6 @@ The following environment variables are used by this app:
 - `API_URL`: The URL of the domain where the app is running,
   for example https://any-audio-finder.iran.liara.run/.
 
-- `GOOGLE_SEARCH_API_KEY`: An API key required to search Google.
-
 - `POSTGRES_DB_USER`, `POSTGRES_DB_PASSWORD`, `POSTGRES_DB_HOST`, `POSTGRES_DB_PORT`, `POSTGRES_DB_NAME`:
   These variables are used to connect to a PostgreSQL database. They contain the username, password, hostname, port, and
   database name, respectively.
