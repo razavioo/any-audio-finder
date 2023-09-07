@@ -1,6 +1,9 @@
+import java.util.*
+
 plugins {
     id("java")
     kotlin("jvm") version "1.7.10"
+    id("maven-publish")
 }
 
 group = "dev.emad"
@@ -8,6 +11,31 @@ version = "0.0.1"
 
 repositories {
     mavenCentral()
+}
+
+publishing {
+    publications {
+        register<MavenPublication>("gpr") {
+            from(components["java"])
+            groupId = "dev.emad"
+            artifactId = "music-grabber"
+            version = "0.0.1"
+        }
+    }
+
+    repositories {
+        maven {
+            name = "GitHubPackages"
+            url = uri("https://maven.pkg.github.com/razavioo/any-audio-finder")
+            credentials {
+                val properties = Properties().apply {
+                    load(File("local.properties").inputStream())
+                }
+                username = properties.getProperty("gpr.user")
+                password = properties.getProperty("gpr.token")
+            }
+        }
+    }
 }
 
 dependencies {
